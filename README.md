@@ -24,15 +24,8 @@ Node.js: v18+
 Telegraf: v4
 
 Platform: Termux / VPS
-
-
-Simpan di nano:
-- `CTRL + O` → Enter → `CTRL + X`
-
----
-
-### 2. Tambahkan ke Git
 ```bash
+
 git add README.md
 git commit -m "Tambah dokumentasi README"
 git push origin main
