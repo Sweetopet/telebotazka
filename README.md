@@ -17,15 +17,6 @@ cd telebotazka
 npm install
 node index.js
 
-Versi
-
-Node.js: v18+
-
-Telegraf: v4
-
-Platform: Termux / VPS
-```bash
-
 git add README.md
 git commit -m "Tambah dokumentasi README"
 git push origin main
