@@ -26,18 +26,42 @@ let orders = {};
 let ytStock = []; // simpan stok link YouTube Premium
 
 // ===== Command /start =====
-bot.start((ctx) => {
-  ctx.reply(
+bot.start(async (ctx) => {
+  // Balasan teks + tombol
+  await ctx.reply(
     `👋 Halo ${ctx.from.first_name}!\n\n` +
-      `Selamat datang di YTpremium ID🎉\n` +
-      `Dengan bot ini kamu bisa beli youtube premium otomstis.\n` +
-      `Silakan pilih menu di bawah ini:\n\n`+
-      `untuk melihat koin ada gunakan perintah \n/koin atau /profile`,
-    Markup.inlineKeyboard([
-      [Markup.button.callback("💰 Topup Koin", "menu_topup")],
-      [Markup.button.url("📞 Customer Service", "https://t.me/usernameCS")],
-      [Markup.button.callback("🎵 Buy YT Premium", "buy_premium")],
-    ])
+      `Selamat datang di *YTpremium ID* 🎉\n` +
+      `Dengan bot ini kamu bisa beli youtube premium otomatis.\n\n` +
+      `Untuk melihat koin gunakan perintah:\n/koin atau /profile`,
+    {
+      parse_mode: "Markdown",
+      ...Markup.inlineKeyboard([
+        [Markup.button.callback("💰 Topup Koin", "menu_topup")],
+        [Markup.button.url("📞 Customer Service", "https://t.me/usernameCS")],
+        [Markup.button.callback("🎵 Buy YT Premium", "buy_premium")],
+      ]),
+    }
+  );
+
+  // Kirim foto cover
+  await ctx.replyWithPhoto(
+    { source: "./cover.jpg" },
+    { caption: "🔔 𝗣𝗔𝗡𝗗𝗨𝗔𝗡\n\n° ᵀⁱᵈᵃᵏ ᵇᵒˡᵉʰ ˢᵖᵃᵐ ᵇᵒᵗ\n° ᴶⁱᵏᵃ ᵐᵉⁿᵉᵐᵘᵏᵃⁿ ᵇᵘᵍ ᵃᵗᵃᵘ ᵉʳʳᵒʳ ˢᵉᵍᵉʳᵃ ˡᵃᵖᵒʳ\n°ᴾᵃᵗᵘʰⁱ ˢʸᵃʳᵃᵗ & ᵏᵉᵗᵉⁿᵗᵘᵃⁿ\n°ᴶⁱᵏᵃ ᵐᵉˡᵃⁿᵍᵍᵃʳ ᵍᵃʳᵃⁿˢⁱ ʰᵃⁿᵍᵘˢ" }
+  );
+
+  // Kirim audio
+  await ctx.replyWithAudio(
+    {
+      source: "./welcome.m4a", // file audio
+      filename: "Welcome_YTPremium.m4a",
+    },
+    {
+      caption:
+        "ᴴᵃˡˡᵒ ᵏᵉᵖᵃᵈᵃ ᵖᵉⁿᵍᵘⁿʲᵘⁿᵍ ʰᵃʳᵃᵖ\nˡᵘᵃⁿᵍᵏᵃⁿ ʷᵃᵏᵗᵘ ᵃⁿᵈᵃ ᵐᵉⁿᵈᵉⁿᵍᵃʳᵏᵃⁿ\nʰⁱᵐᵇᵃᵘᵃⁿ ᵏᵃᵐⁱ ⁱⁿⁱ ᵃᵍᵃʳ ᵗⁱᵈᵃᵏ ᵗᵉʳʲᵃᵈⁱ\nʰᵃˡ ʸᵃⁿᵍ ᵈⁱ ⁱⁿᵍⁱⁿᵏᵃⁿ ᵀᵉʳⁱᵐᵃ ᵏᵃˢⁱʰ",
+      title: "𝐀𝐧𝐧𝐨𝐮𝐧𝐜𝐞𝐦𝐞𝐧𝐭 🔔",
+      performer: "YTpremium Bot 🤖",
+      parse_mode: "Markdown",
+    }
   );
 });
 
@@ -229,7 +253,7 @@ bot.action("buy_premium", (ctx) => {
   const jam = moment().tz("Asia/Jakarta").format("HH:mm:ss");
 
   ctx.reply(
-    `**YOUTUBE PREMIUM**\n\n` +
+    `*YOUTUBE PREMIUM*\n\n` +
       `👤 User : ${ctx.from.username || ctx.from.first_name}\n` +
       `💰 Koin : Rp${userCoins[ctx.from.id] || 0}\n` +
       `📅 Tanggal : ${tanggal}\n` +
